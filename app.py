@@ -1,11 +1,17 @@
 from flask import Flask, render_template, request, redirect, url_for, session,flash
 import random
-# from flask_mail import Mail, Message
+from flask_mail import Mail, Message
 import mysql.connector
 import config
 
 app = Flask(__name__)
 app.secret_key = config.SECRET_KEY
+app.config['MAIL_SERVER'] = config.MAIL_SERVER
+app.config['MAIL_PORT'] = config.MAIL_PORT
+app.config['MAIL_USERNAME'] = config.MAIL_USERNAME
+app.config['MAIL_PASSWORD'] = config.MAIL_PASSWORD
+app.config['MAIL_USE_TLS'] = config.MAIL_USE_TLS
+mail = Mail(app)
 def get_db_connection():
     conn = mysql.connector.connect(
     host = config.DB_HOST,
